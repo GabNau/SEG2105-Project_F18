@@ -60,16 +60,6 @@ public class HomeOwnerTest {
           return intent;
       }
     };
-    public ActivityTestRule<ServiceListHomeOwner> sLHoTestRule = new ActivityTestRule<ServiceListHomeOwner>(ServiceListHomeOwner.class){
-        @Override
-        protected Intent getActivityIntent()
-        {
-            Intent intent = new Intent();
-            intent.putExtra("username","HomeOwner John");
-            intent.putExtra("role", "Home Owner");
-            return intent;
-        }
-    };
     public ActivityTestRule<Service_providers_list> splTestRule = new ActivityTestRule<Service_providers_list>(Service_providers_list.class){
         @Override
         protected Intent getActivityIntent()
@@ -85,7 +75,6 @@ public class HomeOwnerTest {
     private rating_select_dialog rsd = null;
     private Service_providers_list spl = null;
     private BookingsList bL = null;
-    private ServiceListHomeOwner sLHo = null;
     private WelcomeScreen hOwner = null;
     private WelcomeScreen sProvider = null;
     private MyDBHandler database;
@@ -101,7 +90,6 @@ public class HomeOwnerTest {
         hOwner = hOwnerTestRule.getActivity();
         sProvider = sProviderTestRule.getActivity();
         sList = sListTestRule.getActivity();
-        sLHo = sLHoTestRule.getActivity();
         spl = splTestRule.getActivity();
         rsd = rsdTestRule.getActivity();
         bL = bLTestRule.getActivity();
@@ -183,7 +171,6 @@ public class HomeOwnerTest {
         serviceType.setName("Harvey Cleaners");
         serviceType.setRate(55.5);
       //  ArrayList<Service> soFar = database.getAllServices();
-//        assertTrue(sLHo.serviceByRate());
 
         //spl.updateRatingFilter(); Time constraint prevented us from testing the buttons below instead
 //        ratingBtn = spl.findViewById(R.id.rating);
