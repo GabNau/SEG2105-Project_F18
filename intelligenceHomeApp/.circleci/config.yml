@@ -1,9 +1,9 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/intelligenceHomeApp/app
+    working_directory: ~/intelligenceHomeApp
     docker:
-      - image: circleci/android:api-25
+      - image: circleci/android:api-25-alpha
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
