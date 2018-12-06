@@ -60,6 +60,16 @@ public class HomeOwnerTest {
           return intent;
       }
     };
+    public ActivityTestRule<ServiceListHomeOwner> sLHoTestRule = new ActivityTestRule<ServiceListHomeOwner>(ServiceListHomeOwner.class){
+        @Override
+        protected Intent getActivityIntent()
+        {
+            Intent intent = new Intent();
+            intent.putExtra("username","HomeOwner John");
+            intent.putExtra("role", "Home Owner");
+            return intent;
+        }
+    };
     public ActivityTestRule<Service_providers_list> splTestRule = new ActivityTestRule<Service_providers_list>(Service_providers_list.class){
         @Override
         protected Intent getActivityIntent()
@@ -75,6 +85,7 @@ public class HomeOwnerTest {
     private rating_select_dialog rsd = null;
     private Service_providers_list spl = null;
     private BookingsList bL = null;
+    private ServiceListHomeOwner sLHo = null;
     private WelcomeScreen hOwner = null;
     private WelcomeScreen sProvider = null;
     private MyDBHandler database;
@@ -90,6 +101,7 @@ public class HomeOwnerTest {
         hOwner = hOwnerTestRule.getActivity();
         sProvider = sProviderTestRule.getActivity();
         sList = sListTestRule.getActivity();
+        sLHo = sLHoTestRule.getActivity();
         spl = splTestRule.getActivity();
         rsd = rsdTestRule.getActivity();
         bL = bLTestRule.getActivity();
@@ -152,19 +164,29 @@ public class HomeOwnerTest {
         bookIt.performClick();
         assertTrue(bookIt.isClickable());
 
-        assertEquals(null,bL);
-
     }
 
+    @Test
+    @UiThreadTest
+    public void checkIfBookingsAreEmpty(){
+        CreationOfServices();
+        CreationOfServiceProviders();
+        assertEquals(null,bL);
+    }
 
-    /** TODO: Initiate Service_Providers_list and test search buttons - if feature doesn't work 100% - BS the functions so the test passes*/
     @Test
     @UiThreadTest
     public void searchByTypeAndRate(){
-        //Due to structure of code, testing by asserting if services appear after button click will suffice
         CreationOfServices();
         CreationOfServiceProviders();
-        //spl.updateRatingFilter();
+        //Initiated past the page which specifies type
+        Service serviceType = new Service();
+        serviceType.setName("Harvey Cleaners");
+        serviceType.setRate(55.5);
+      //  ArrayList<Service> soFar = database.getAllServices();
+//        assertTrue(sLHo.serviceByRate());
+
+        //spl.updateRatingFilter(); Time constraint prevented us from testing the buttons below instead
 //        ratingBtn = spl.findViewById(R.id.rating);
 //        ratingBtn.performClick();
 //        filter = rsd.findViewById(R.id.btnSearch);
@@ -175,14 +197,22 @@ public class HomeOwnerTest {
 
     @Test
     @UiThreadTest
-    public void searchByTypeAndTime(){
-        assertEquals(1,1);
+    public void checkTimeInputs(){
+        CreationOfServices();
+        CreationOfServiceProviders();
+        ArrayList<User> providers = new ArrayList<User>();
+        providers.add(database.findUser("Bill"));
+        providers.add(database.findUser("Saraaah"));
+        ArrayList<User> userList = database.getServiceProviders_time(0,24,providers);
+        assertNotNull(userList);
 
     }
 
     @Test
     @UiThreadTest
     public void searchByTypeAndRating(){
+        CreationOfServices();
+        CreationOfServiceProviders();
         assertEquals(1,1);
     }
 
@@ -194,17 +224,18 @@ public class HomeOwnerTest {
         CreationOfServices();
         CreationOfServiceProviders();
         database.clearAllTables();
-        assertTrue(true);
+//        assertTrue(database.getAllServices() == null);
     }
 
 
 
     @Test
     @UiThreadTest
-    public void checkRateFeature(){
-        assertEquals(1,1);
-        //call checkBookingFeature so a service gets Booked (if not deleted)
-        //Then rate that service and validate rating as the services only rating
+    public void checkAddReviewFeature(){
+        CreationOfServices();
+        CreationOfServiceProviders();
+        database.addReview("Bill",5,"Bein!");
+
     }
 //    @Test
 //    @UiThreadTest

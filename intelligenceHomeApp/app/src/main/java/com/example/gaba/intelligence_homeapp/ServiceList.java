@@ -178,7 +178,6 @@ public class ServiceList extends AppCompatActivity {
         }
     }
 
-
     public boolean showAddDeleteProviderDialog(final String username, final String serviceName){
         try {
             if (username == "segTestUser")
