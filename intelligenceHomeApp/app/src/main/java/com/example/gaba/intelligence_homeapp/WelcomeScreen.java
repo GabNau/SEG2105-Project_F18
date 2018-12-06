@@ -255,4 +255,5 @@ public class WelcomeScreen extends AppCompatActivity {
         minute1F = minute;
     }
     */
+
 }
