@@ -68,7 +68,7 @@ public class WelcomeScreen extends AppCompatActivity {
             str = "Welcome!";
         }
 
-        //When runnign App from Login, the following should never run
+        //When running App from Login, the following should never run
         // only set for when app doesn't start with login
         try {
             String roleType = getIntent().getStringExtra("roleType");

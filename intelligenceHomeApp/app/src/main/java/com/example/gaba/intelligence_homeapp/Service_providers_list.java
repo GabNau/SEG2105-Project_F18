@@ -85,6 +85,20 @@ public class Service_providers_list extends AppCompatActivity{
 
 
     }
+    public void updateRatingFilter(){
+        minFilter = minRating.getProgress();
+        maxFilter = maxRating.getProgress();
+
+        serviceProvidersList = dbHandler.getServiceProviders_rating(minFilter,maxFilter, dbHandler.getServiceProviders_time(minTime,maxTime,dbHandler.getServiceProviders(serviceName)));
+        adapter = new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList);
+        listView.setAdapter(new ArrayAdapter(getApplicationContext(), android.R.layout.simple_list_item_1, serviceProvidersList));
+
+        findViewById(R.id.rating_options).setVisibility(View.GONE);
+        findViewById(R.id.filter_options).setVisibility(View.VISIBLE);
+        findViewById(R.id.service_providers_list).setVisibility(View.VISIBLE);
+
+    }
+
     public void updateRatingFilter(View view){
         minFilter = minRating.getProgress();
         maxFilter = maxRating.getProgress();
