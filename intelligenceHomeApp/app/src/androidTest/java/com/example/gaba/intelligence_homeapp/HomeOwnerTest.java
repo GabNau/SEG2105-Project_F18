@@ -163,7 +163,6 @@ public class HomeOwnerTest {
         bookIt = hOwner.findViewById(R.id.bookings);
         bookIt.performClick();
         assertTrue(bookIt.isClickable());
-
     }
 
     @Test
@@ -210,10 +209,12 @@ public class HomeOwnerTest {
 
     @Test
     @UiThreadTest
-    public void searchByTypeAndRating(){
+    public void checkAvailability(){
         CreationOfServices();
         CreationOfServiceProviders();
-        assertEquals(1,1);
+        database.updateAvailability("Bill","12");
+        String bler = database.getAvailabilities("Bill");
+        assertNotNull(bler);
     }
 
     @Test
@@ -226,9 +227,7 @@ public class HomeOwnerTest {
         database.clearAllTables();
 //        assertTrue(database.getAllServices() == null);
     }
-
-
-
+    
     @Test
     @UiThreadTest
     public void checkAddReviewFeature(){
@@ -237,14 +236,5 @@ public class HomeOwnerTest {
         database.addReview("Bill",5,"Bein!");
 
     }
-//    @Test
-//    @UiThreadTest
-//    public void validateNumericalInput(){
-//        //Test if correct inputs set to search engine
-//        // assertNotNull(welcomeScreen.findViewById(R.id.searchEngine);
-//    }
-//    @Test
-//    @UiThreadTest
-//    public void checkServiceProvidersList(){}
 
 }
