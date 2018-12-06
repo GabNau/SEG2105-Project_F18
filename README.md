@@ -23,8 +23,7 @@ Nikita Bliumkin 8752021
 #Starts Here
 Build Status
 [![Build
-Status](https://circleci.com/gh/SEG2105-Project_F18/intelligenceHomeApp.png?branch=master)](https://circle
-ci.com/gh/SEG2105-Project_F18/intelligenceHomeApp)
+Status](https://circleci.com/gh/pratikmistry-99/workflows/SEG2105-Project_F18/tree/master)](https://circleci.com/gh/pratikmistry-99/workflows/SEG2105-Project_F18)
 #Ends Here
 
 
